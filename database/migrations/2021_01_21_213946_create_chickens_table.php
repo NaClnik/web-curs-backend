@@ -22,7 +22,7 @@ class CreateChickensTable extends Migration
             $table->integer('age');
             $table->integer('number_of_eggs');
             $table->foreignId('breed_id');
-            $table->foreign('cell_id');
+            $table->foreignId('cell_id');
             $table->timestamps();
 
             // Настройка связей между таблицами.
