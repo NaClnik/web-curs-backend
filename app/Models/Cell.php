@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Cell extends Model
 {
     use HasFactory;
+
+    public function chickens(){
+        return $this->hasMany(Chicken::class);
+    } // chickens.
+
+    public function employee(){
+        return $this->belongsTo(Employee::class);
+    } // employee.
+
+    public function row(){
+        return $this->belongsTo(Row::class);
+    } // row.
 }
