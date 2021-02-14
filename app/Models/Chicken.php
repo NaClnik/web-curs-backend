@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
  * App\Models\Chicken
  *
@@ -34,6 +35,14 @@ use Illuminate\Database\Eloquent\Model;
 class Chicken extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'weight',
+        'age',
+        'number_of_eggs',
+        'breed_id',
+        'cell_id'
+    ]; // fillable.
 
     public function breed(){
         return $this->belongsTo(Breed::class);

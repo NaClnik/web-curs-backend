@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
  * App\Models\Breed
  *
@@ -33,6 +34,13 @@ use Illuminate\Database\Eloquent\Model;
 class Breed extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'performance',
+        'avg_weight',
+        'diet_id'
+    ]; // fillable.
 
     public function diet(){
         return $this->belongsTo(Diet::class);

@@ -11,7 +11,6 @@ use Illuminate\Notifications\Notifiable;
  * App\Models\User
  *
  * @property int $id
- * @property string $name
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
@@ -19,6 +18,14 @@ use Illuminate\Notifications\Notifiable;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $role_id
+ * @property string $surname
+ * @property string $name
+ * @property string $patronymic
+ * @property string $passport
+ * @property float $salary
+ * @property string $photo_path
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Cell[] $cells
+ * @property-read int|null $cells_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \App\Models\Role $role
@@ -31,8 +38,13 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassport($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePatronymic($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePhotoPath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRoleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereSalary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereSurname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
@@ -51,7 +63,12 @@ class User extends Authenticatable
         'password',
         'api_token',
         'role_id',
-        'employee_id'
+        'surname',
+        'name',
+        'patronymic',
+        'passport',
+        'salary',
+        'photo_path'
     ];
 
     /**
@@ -77,8 +94,7 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     } // role.
 
-    public function employee()
-    {
-        return $this->belongsTo(Employee::class);
-    }
+    public function cells(){
+        return $this->hasMany(Cell::class);
+    } // cells.
 } // User.

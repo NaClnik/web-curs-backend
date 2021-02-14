@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
  * App\Models\Diet
  *
@@ -26,6 +27,10 @@ use Illuminate\Database\Eloquent\Model;
 class Diet extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name'
+    ]; // fillable.
 
     public function breeds(){
         return $this->hasMany(Breed::class);

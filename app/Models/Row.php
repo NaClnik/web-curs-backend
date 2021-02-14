@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
  * App\Models\Row
  *
@@ -27,6 +28,10 @@ use Illuminate\Database\Eloquent\Model;
 class Row extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'shop_id'
+    ]; // fillable.
 
     public function cells(){
         return $this->hasMany(Cell::class);
