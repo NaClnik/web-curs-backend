@@ -16,21 +16,12 @@ class AdminController extends Controller
         $this->usersService = $usersService;
     } // __construct.
 
-    public function createUser()
+    public function hireUser(Request $request)
     {
-        // TODO: Переделать.
-        $password = 'user123';
-
-        $user = $this->usersService->createUserFromArray([
-            'name' => 'ivanov',
-            'email' => 'danycall19@gmail.com',
-            'password' => $password,
-            'role_id' => 1,
-            'employee_id' => 1
-        ]);
-
-        Mail::to($user->email)->send(new AuthUserMail($user));
-
-        return 'Сообщение отправлено';
+        $this->usersService->hireUserAndSendMail($request->all());
     } // createUser.
+
+    public function uploadPhoto(Request $request){
+        return $request->file('photo')->store('uploads', 'public');
+    } // uploadPhoto.
 } // AdminController.

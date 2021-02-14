@@ -25,3 +25,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //});
 
 Route::get('/mail', [AdminController::class, 'createUser']);
+
+Route::post('/photo', [AdminController::class, 'uploadPhoto']);
+Route::post('/admin/hireUser', [AdminController::class, 'hireUser']);

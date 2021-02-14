@@ -12,16 +12,13 @@ class AuthUserMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private User $user;
+    private string $email;
+    private string $password;
 
-    /**
-     * Create a new message instance.
-     *
-     * @param User $user
-     */
-    public function __construct(User $user)
+    public function __construct(string $email, string $password)
     {
-        $this->user = $user;
+        $this->email = $email;
+        $this->password = $password;
     }  // __construct.
 
     /**
@@ -31,6 +28,6 @@ class AuthUserMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.auth_user', ['user' => $this->user]);
-    }
+        return $this->view('mails.auth_user', ['email' => $this->email, 'password' => $this->password]);
+    } // build.
 }
