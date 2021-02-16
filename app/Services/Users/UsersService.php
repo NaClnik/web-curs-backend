@@ -6,6 +6,7 @@ namespace App\Services\Users;
 
 use App\Mail\AuthUserMail;
 use App\Models\User;
+use App\Services\Users\Handlers\HireUserAndSendMailHandler;
 use App\Services\Users\Repositories\UsersRepository;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -16,9 +17,13 @@ class UsersService
     // Поля класса.
     private UsersRepository $usersRepository;
 
-    public function __construct(UsersRepository $usersRepository)
+    // Хэндлеры класса.
+    private HireUserAndSendMailHandler $hireUserAndSendMailHandler;
+
+    public function __construct(UsersRepository $usersRepository, HireUserAndSendMailHandler $hireUserAndSendMailHandler)
     {
         $this->usersRepository = $usersRepository;
+        $this->hireUserAndSendMailHandler = $hireUserAndSendMailHandler;
     } // __construct.
 
     public function createUserFromArray(array $data): User
@@ -26,25 +31,36 @@ class UsersService
         return $this->usersRepository->createFromArray($data);
     } // createUserFromArray.
 
-    public function createUser(array $data){
-        return $this->usersRepository->createFromArray([
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'api_token' => Str::random(80),
-            'role_id' => 1,
-            'surname' => $data['surname'],
-            'name' => $data['name'],
-            'patronymic' => $data['patronymic'],
-            'passport' => $data['passport'],
-            'salary' => $data['salary'],
-            'photo_path' => $data['photo_path']
-        ]);
-    } // hireEmployee.
-
     public function hireUserAndSendMail(array $data)
     {
-        $user = $this->createUser($data);
+        $this->hireUserAndSendMailHandler->handle($data);
+    } // hireUserAndSendMail.
 
-        Mail::to($user->email)->send(new AuthUserMail($data['email'], $data['password']));
-    }
+    public function getAllUsers(){
+        return $this->usersRepository->getAll();
+    } // getAllUsers.
+
+    public function getUserById(int $id){
+        return $this->usersRepository->getById($id);
+    } // getUserById.
+
+    public function updateUser(User $user, array $data)
+    {
+        $this->usersRepository->update($user, $data);
+    } // updateUser.
+
+    public function getUserByEmailAndPassword(string $email, string $password) : User
+    {
+        $returnUser = null;
+
+        $user = $this->usersRepository->getByEmail($email);
+
+        // TODO: Проверить на работоспособность.
+        if($user != null && Hash::check($password, $user->password)){
+            $returnUser = $user;
+        } // if.
+
+        return $returnUser;
+    } // getUserByEmailAndPassword.
+
 } // UsersService.

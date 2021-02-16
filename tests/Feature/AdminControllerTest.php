@@ -38,4 +38,11 @@ class AdminControllerTest extends TestCase
             'photo_path' => $photoPath
         ]);
     } // testHireUser.
+
+    public function testLogin()
+    {
+        $response = $this->postJson('/api/auth/login', ['email' => 'danycall19@gmail.com', 'password' => 'snake']);
+
+        $response->json();
+    } // testLogin
 }

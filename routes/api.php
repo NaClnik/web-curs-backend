@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,16 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user()->role;
+Route::middleware(['auth:api', 'role:employee'])->get('/user', function (Request $request) {
+    return  'ok';//$request->user()->role;
 });
 
 //Route::get('/user', function (Request $request) {
 //    return "sasa";
-//    //return $request->user();
+//    return $request->user();
 //});
 
-Route::get('/mail', [AdminController::class, 'createUser']);
+//Route::get('/mail', [AdminController::class, 'createUser']);
+//
+//Route::post('/photo', [AdminController::class, 'uploadPhoto']);
+//Route::post('/admin/hireUser', [AdminController::class, 'hireUser']);
 
-Route::post('/photo', [AdminController::class, 'uploadPhoto']);
-Route::post('/admin/hireUser', [AdminController::class, 'hireUser']);
+Route::post('/auth/login', LoginController::class);
