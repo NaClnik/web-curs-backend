@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cms;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\Users\UsersService;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
@@ -64,19 +66,24 @@ class UsersController extends Controller
     {
         $this->usersService->updateUser($user, $request->all());
 
-        return response();
+        return response('');
     } // update.
 
     /**
      * Remove the specified resource from storage.
      *
      * @param User $user
-     * @return Response
-     * @throws \Exception
+     * @return Application|ResponseFactory|JsonResponse|Response
+     * @throws Exception
      */
     public function destroy(User $user)
     {
-        $user->delete();
+        try {
+
+            $user->delete();
+        } catch (Exception $exception){
+            return response()->json(['error' => 'user not found'], 404);
+        } // catch.
 
         return response('', 204);
     } // destroy.

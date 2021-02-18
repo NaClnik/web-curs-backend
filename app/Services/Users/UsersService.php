@@ -8,6 +8,8 @@ use App\Mail\AuthUserMail;
 use App\Models\User;
 use App\Services\Users\Handlers\HireUserAndSendMailHandler;
 use App\Services\Users\Repositories\UsersRepository;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -51,16 +53,14 @@ class UsersService
 
     public function getUserByEmailAndPassword(string $email, string $password) : User
     {
-        $returnUser = null;
-
         $user = $this->usersRepository->getByEmail($email);
 
         // TODO: Проверить на работоспособность.
-        if($user != null && Hash::check($password, $user->password)){
-            $returnUser = $user;
+        if(!Hash::check($password, $user->password)){
+            throw new AuthorizationException('invalid password');
         } // if.
 
-        return $returnUser;
+        return $user;
     } // getUserByEmailAndPassword.
 
 } // UsersService.

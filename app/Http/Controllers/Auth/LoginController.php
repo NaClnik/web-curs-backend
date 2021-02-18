@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Services\Redirects\RedirectsService;
 use App\Services\Users\UsersService;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -28,20 +30,18 @@ class LoginController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $response = response()->json([], 401);
-
         $data = $request->all();
 
-        // TODO: Проверить переданные данные на null.
-        $user = $this->usersService->getUserByEmailAndPassword($data['email'], $data['password']);
+        try {
+            // TODO: Подумать над переводом на русский.
+            $user = $this->usersService->getUserByEmailAndPassword($data['email'], $data['password']);
+        } catch (ModelNotFoundException | AuthorizationException $modelNotFoundException){
+            return response()->json(['error' => 'invalid email or password'], 401);
+        } // catch.
 
-        if($user != null){
-            $response = response()->json([
-                'api_token' => $user->api_token,
-                'redirect_to' => $this->redirectsService->getRedirectUrlByRole($user->role->name)
-            ]);
-        } // if.
-
-        return $response;
+        return response()->json([
+            'api_token' => $user->api_token,
+            'redirect_to' => $this->redirectsService->getRedirectUrlByRole($user->role->name)
+        ]);
     } // __invoke.
 }

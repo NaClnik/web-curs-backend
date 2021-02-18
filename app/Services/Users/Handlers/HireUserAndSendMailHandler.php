@@ -38,6 +38,6 @@ class HireUserAndSendMailHandler
     {
         $user = $this->createUser($data);
 
-        Mail::to($user->email)->send(new AuthUserMail($data['email'], $data['password']));
+        Mail::to($data['email'])->send(new AuthUserMail($data['email'], $data['password']));
     } // handle.
 }
