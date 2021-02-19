@@ -63,4 +63,8 @@ class UsersService
         return $user;
     } // getUserByEmailAndPassword.
 
+    public function deleteUser(User $user): void{
+        $this->usersRepository->delete($user);
+    } // deleteUser.
+
 } // UsersService.

@@ -79,8 +79,7 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         try {
-
-            $user->delete();
+            $this->usersService->deleteUser($user);
         } catch (Exception $exception){
             return response()->json(['error' => 'user not found'], 404);
         } // catch.

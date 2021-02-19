@@ -28,4 +28,8 @@ class UsersRepository
     public function getByEmail(string $email){
         return User::query()->where('email', $email)->firstOrFail();
     } // getByEmailAndPassword.
+
+    public function delete(User $user) : bool{
+        return $user->delete();
+    } // delete.
 } // UsersRepository.

@@ -76,7 +76,7 @@ class UsersControllerTest extends TestCase
 
     public function testDestroy()
     {
-        $response = $this->delete(route('users.destroy', ['user' => 9]), [], $this->headers);
+        $response = $this->delete(route('users.destroy', ['user' => 7]), [], $this->headers);
 
         $response->assertStatus(204);
     } // testDestroy.
