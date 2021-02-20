@@ -7,6 +7,7 @@ namespace App\Services\Shops;
 use App\Models\Shop;
 use App\Services\Shops\Repositories\ShopsRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ShopsService
 {
@@ -33,6 +34,11 @@ class ShopsService
     {
         return $this->shopsRepository->createFromArray($data);
     } // createShopFromArray.
+
+    public function updateShop(Shop $shop, array $data)
+    {
+        return $this->shopsRepository->update($shop, $data);
+    } // updateShop.
 
     public function deleteShop(Shop $user): bool
     {

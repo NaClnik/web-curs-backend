@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Cms\ShopsController;
 use App\Http\Controllers\Cms\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,8 @@ use Illuminate\Support\Facades\Route;
 //Route::post('/admin/hireUser', [AdminController::class, 'hireUser']);
 
 //Route::post('/auth/login', LoginController::class);
+
+Route::apiResource('shops', ShopsController::class);
 
 // Общая маршрутизация.
 Route::post('auth/login', LoginController::class);

@@ -24,6 +24,11 @@ class ShopsRepository
         return Shop::query()->create($data);
     } // createFromArray.
 
+    public function update(Shop $shop, array $data): bool
+    {
+        return $shop->update($data);
+    } // update.
+
     public function delete(Shop $shop): bool
     {
         return $shop->delete();
