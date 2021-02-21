@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
-use App\Models\Chicken;
-use App\Services\Chickens\ChickensService;
+use App\Models\Breed;
+use App\Services\Breeds\BreedsService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class ChickensController extends Controller
+class BreedsController extends Controller
 {
     // Сервисы.
-    private ChickensService $chickensService;
+    private BreedsService $breedsService;
 
     // Конструктор.
-    public function __construct(ChickensService $rowsService) {
-        $this->chickensService = $rowsService;
+    public function __construct(BreedsService $breedsService) {
+        $this->breedsService = $breedsService;
     } // __construct.
 
     /**
@@ -26,7 +26,7 @@ class ChickensController extends Controller
      */
     public function index()
     {
-        return response()->json($this->chickensService->getAllChickens());
+        return response()->json($this->breedsService->getAllBreeds());
     } // index.
 
     /**
@@ -37,7 +37,7 @@ class ChickensController extends Controller
      */
     public function store(Request $request)
     {
-        $this->chickensService->createChickenFromArray($request->all());
+        $this->breedsService->createBreedFromArray($request->all());
 
         return response('', 201);
     } // store.
@@ -45,24 +45,24 @@ class ChickensController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Chicken $chicken
+     * @param Breed $breed
      * @return JsonResponse
      */
-    public function show(Chicken $chicken)
+    public function show(Breed $breed)
     {
-        return response()->json($chicken);
+        return response()->json($breed);
     } // show.
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param Chicken $row
+     * @param Breed $breed
      * @return Response
      */
-    public function update(Request $request, Chicken $chicken)
+    public function update(Request $request, Breed $breed)
     {
-        $this->chickensService->updateChicken($chicken, $request->all());
+        $this->breedsService->updateBreed($breed, $request->all());
 
         return response('');
     } // update.
@@ -70,12 +70,12 @@ class ChickensController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Chicken $row
+     * @param Breed $breed
      * @return JsonResponse
      */
-    public function destroy(Chicken $chicken)
+    public function destroy(Breed $breed)
     {
-        $this->chickensService->deleteChicken($chicken);
+        $this->breedsService->deleteBreed($breed);
 
         return response()->json('', 204);
     } // destroy.
