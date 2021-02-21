@@ -33,13 +33,13 @@ class BreedsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
         $this->breedsService->createBreedFromArray($request->all());
 
-        return response('', 201);
+        return response()->json([], 201);
     } // store.
 
     /**
@@ -58,13 +58,13 @@ class BreedsController extends Controller
      *
      * @param Request $request
      * @param Breed $breed
-     * @return Response
+     * @return JsonResponse
      */
     public function update(Request $request, Breed $breed)
     {
         $this->breedsService->updateBreed($breed, $request->all());
 
-        return response('');
+        return response()->json([]);
     } // update.
 
     /**
@@ -77,6 +77,6 @@ class BreedsController extends Controller
     {
         $this->breedsService->deleteBreed($breed);
 
-        return response()->json('', 204);
+        return response()->json([], 204);
     } // destroy.
 }
