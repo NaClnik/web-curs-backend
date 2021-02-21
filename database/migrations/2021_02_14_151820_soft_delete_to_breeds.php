@@ -26,7 +26,7 @@ class SoftDeleteToBreeds extends Migration
     public function down()
     {
         Schema::table('breeds', function (Blueprint $table) {
-            //
+            $table->dropSoftDeletes();
         });
     }
 }

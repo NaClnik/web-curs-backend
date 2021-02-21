@@ -26,7 +26,7 @@ class SoftDeleteToShops extends Migration
     public function down()
     {
         Schema::table('shops', function (Blueprint $table) {
-            //
+            $table->dropSoftDeletes();
         });
     }
 }

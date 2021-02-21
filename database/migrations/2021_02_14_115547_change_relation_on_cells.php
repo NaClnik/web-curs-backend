@@ -31,6 +31,14 @@ class ChangeRelationOnCells extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('cells', function (Blueprint $table) {
+            $table->dropForeign('cells_user_id_foreign');
+            $table->dropColumn('user_id');
+
+            $table->foreignId('employee_id');
+            $table->foreign('employee_id')
+                ->references('id')
+                ->on('employees');
+        });
     }
 }

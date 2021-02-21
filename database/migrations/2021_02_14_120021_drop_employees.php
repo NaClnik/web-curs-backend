@@ -25,6 +25,14 @@ class DropEmployees extends Migration
      */
     public function down()
     {
-        //
+        Schema::create('employees', function (Blueprint $table) {
+            $table->id();
+            $table->string('surname');
+            $table->string('name');
+            $table->string('patronymic');
+            $table->string('passport');
+            $table->string('salary');
+            $table->timestamps();
+        });
     }
 }

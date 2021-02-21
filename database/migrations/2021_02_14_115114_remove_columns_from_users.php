@@ -28,7 +28,13 @@ class RemoveColumnsFromUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->foreignId('employee_id');
+
+            $table->foreign('employee_id')
+                ->references('id')
+                ->on('employees');
+
+            $table->string('name');
         });
     }
 }

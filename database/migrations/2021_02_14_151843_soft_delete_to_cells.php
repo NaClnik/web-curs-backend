@@ -26,7 +26,7 @@ class SoftDeleteToCells extends Migration
     public function down()
     {
         Schema::table('cells', function (Blueprint $table) {
-            //
+            $table->dropSoftDeletes();
         });
     }
 }

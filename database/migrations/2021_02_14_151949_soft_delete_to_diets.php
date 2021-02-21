@@ -26,7 +26,7 @@ class SoftDeleteToDiets extends Migration
     public function down()
     {
         Schema::table('diets', function (Blueprint $table) {
-            //
+            $table->dropSoftDeletes();
         });
     }
 }

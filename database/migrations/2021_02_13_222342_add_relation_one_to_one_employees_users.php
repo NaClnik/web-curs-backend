@@ -30,7 +30,9 @@ class AddRelationOneToOneEmployeesUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropForeign('users_employee_id_foreign');
+
+            $table->dropColumn('employee_id');
         });
     }
 }

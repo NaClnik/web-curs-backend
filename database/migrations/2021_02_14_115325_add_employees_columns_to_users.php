@@ -31,7 +31,12 @@ class AddEmployeesColumnsToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('surname');
+            $table->dropColumn('name');
+            $table->dropColumn('patronymic');
+            $table->dropColumn('passport');
+            $table->dropColumn('salary');
+            $table->dropColumn('photo_path');
         });
     }
 }
