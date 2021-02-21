@@ -33,13 +33,13 @@ class ChickensController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
         $this->chickensService->createChickenFromArray($request->all());
 
-        return response('', 201);
+        return response()->json([], 201);
     } // store.
 
     /**
@@ -57,26 +57,26 @@ class ChickensController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param Chicken $row
-     * @return Response
+     * @param Chicken $chicken
+     * @return JsonResponse
      */
     public function update(Request $request, Chicken $chicken)
     {
         $this->chickensService->updateChicken($chicken, $request->all());
 
-        return response('');
+        return response()->json([]);
     } // update.
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Chicken $row
+     * @param Chicken $chicken
      * @return JsonResponse
      */
     public function destroy(Chicken $chicken)
     {
         $this->chickensService->deleteChicken($chicken);
 
-        return response()->json('', 204);
+        return response()->json([], 204);
     } // destroy.
 }

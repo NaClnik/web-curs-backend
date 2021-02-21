@@ -33,13 +33,13 @@ class CellsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
         $this->cellsService->createCellFromArray($request->all());
 
-        return response('', 201);
+        return response()->json([], 201);
     } // store.
 
     /**
@@ -58,25 +58,25 @@ class CellsController extends Controller
      *
      * @param Request $request
      * @param Cell $cell
-     * @return Response
+     * @return JsonResponse
      */
     public function update(Request $request, Cell $cell)
     {
         $this->cellsService->updateCell($cell, $request->all());
 
-        return response('');
+        return response()->json([]);
     } // update.
 
     /**
      * Remove the specified resource from storage.
      *
      * @param Cell $cell
-     * @return Response
+     * @return JsonResponse
      */
     public function destroy(Cell $cell)
     {
         $this->cellsService->deleteCell($cell);
 
-        return response('', 204);
+        return response()->json([], 204);
     } // destroy.
 }

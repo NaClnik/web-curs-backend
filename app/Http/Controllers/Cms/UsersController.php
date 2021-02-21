@@ -35,13 +35,13 @@ class UsersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
         $this->usersService->hireUserAndSendMail($request->all());
 
-        return response('', 201);
+        return response()->json([], 201);
     } // store.
 
     /**
@@ -60,30 +60,26 @@ class UsersController extends Controller
      *
      * @param Request $request
      * @param User $user
-     * @return Application|ResponseFactory|Response|void
+     * @return JsonResponse
      */
     public function update(Request $request, User $user)
     {
         $this->usersService->updateUser($user, $request->all());
 
-        return response('');
+        return response()->json([]);
     } // update.
 
     /**
      * Remove the specified resource from storage.
      *
      * @param User $user
-     * @return Application|ResponseFactory|JsonResponse|Response
+     * @return JsonResponse
      * @throws Exception
      */
     public function destroy(User $user)
     {
-        try {
-            $this->usersService->deleteUser($user);
-        } catch (Exception $exception){
-            return response()->json(['error' => 'user not found'], 404);
-        } // catch.
+        $this->usersService->deleteUser($user);
 
-        return response('', 204);
+        return response()->json([], 204);
     } // destroy.
 }

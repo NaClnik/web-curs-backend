@@ -37,13 +37,13 @@ class ShopsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
         $this->shopsService->createShopFromArray($request->all());
 
-        return response('', 201);
+        return response()->json([], 201);
     } // store.
 
     /**
@@ -54,11 +54,7 @@ class ShopsController extends Controller
      */
     public function show(Shop $shop)
     {
-        try {
-            return response()->json($shop);
-        } catch (ModelNotFoundException $modelNotFoundException){
-            return response()->json([], 204);
-        } // catch.
+        return response()->json($shop);
     } // show.
 
     /**
@@ -66,13 +62,13 @@ class ShopsController extends Controller
      *
      * @param Request $request
      * @param Shop $shop
-     * @return Response
+     * @return JsonResponse
      */
     public function update(Request $request, Shop $shop)
     {
         $this->shopsService->updateShop($shop, $request->all());
 
-        return response('');
+        return response()->json([]);
     } // update.
 
     /**
@@ -83,12 +79,8 @@ class ShopsController extends Controller
      */
     public function destroy(Shop $shop)
     {
-        try {
-            $this->shopsService->deleteShop($shop);
-        } catch (Exception $exception){
-            return response()->json(['error' => $exception->getMessage()], 404);
-        } // catch.
+        $this->shopsService->deleteShop($shop);
 
-        return response('', 204);
+        return response()->json([], 204);
     } // destroy.
 }

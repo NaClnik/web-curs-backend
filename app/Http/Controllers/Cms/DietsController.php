@@ -33,13 +33,13 @@ class DietsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
         $this->dietsService->createDietFromArray($request->all());
 
-        return response('', 201);
+        return response()->json([], 201);
     } // store.
 
     /**
@@ -58,13 +58,13 @@ class DietsController extends Controller
      *
      * @param Request $request
      * @param Diet $diet
-     * @return Response
+     * @return JsonResponse
      */
     public function update(Request $request, Diet $diet)
     {
         $this->dietsService->updateDiet($diet, $request->all());
 
-        return response('');
+        return response()->json([]);
     } // update.
 
     /**
@@ -77,6 +77,6 @@ class DietsController extends Controller
     {
         $this->dietsService->deleteDiet($diet);
 
-        return response()->json('', 204);
+        return response()->json([], 204);
     } // destroy.
 } // DietsController.
