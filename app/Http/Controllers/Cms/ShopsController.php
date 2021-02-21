@@ -16,11 +16,11 @@ use Illuminate\Http\Response;
 class ShopsController extends Controller
 {
     // Сервисы класса.
-    private ShopsService $shopService;
+    private ShopsService $shopsService;
 
     // Конструктор.
     public function __construct(ShopsService $shopsService) {
-        $this->shopService = $shopsService;
+        $this->shopsService = $shopsService;
     } // __construct.
 
     /**
@@ -30,7 +30,7 @@ class ShopsController extends Controller
      */
     public function index()
     {
-        return response()->json($this->shopService->getAllShops());
+        return response()->json($this->shopsService->getAllShops());
     } // index.
 
     /**
@@ -41,7 +41,7 @@ class ShopsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->shopService->createShopFromArray($request->all());
+        $this->shopsService->createShopFromArray($request->all());
 
         return response('', 201);
     } // store.
@@ -70,7 +70,7 @@ class ShopsController extends Controller
      */
     public function update(Request $request, Shop $shop)
     {
-        $this->shopService->updateShop($shop, $request->all());
+        $this->shopsService->updateShop($shop, $request->all());
 
         return response('');
     } // update.
@@ -84,7 +84,7 @@ class ShopsController extends Controller
     public function destroy(Shop $shop)
     {
         try {
-            $this->shopService->deleteShop($shop);
+            $this->shopsService->deleteShop($shop);
         } catch (Exception $exception){
             return response()->json(['error' => $exception->getMessage()], 404);
         } // catch.
