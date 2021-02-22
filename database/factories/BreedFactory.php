@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Role;
+use App\Models\Breed;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
 
-class RoleFactory extends Factory
+class BreedFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Role::class;
+    protected $model = Breed::class;
 
     /**
      * Define the model's default state.
@@ -23,7 +22,10 @@ class RoleFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->title,
+            'performance' => rand(10, 100),
+            'avg_weight' => rand(1,5),
+            'diet_id' => rand(1, 30)
         ];
     }
 }

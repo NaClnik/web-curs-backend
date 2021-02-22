@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
+
 /**
  * App\Models\Chicken
  *
@@ -18,19 +19,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $cell_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Models\Breed $breed
  * @property-read \App\Models\Cell $cell
  * @method static \Illuminate\Database\Eloquent\Builder|Chicken newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Chicken newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Chicken onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Chicken query()
  * @method static \Illuminate\Database\Eloquent\Builder|Chicken whereAge($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Chicken whereBreedId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Chicken whereCellId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Chicken whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chicken whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Chicken whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Chicken whereNumberOfEggs($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Chicken whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Chicken whereWeight($value)
+ * @method static \Illuminate\Database\Query\Builder|Chicken withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Chicken withoutTrashed()
  * @mixin \Eloquent
  */
 class Chicken extends Model

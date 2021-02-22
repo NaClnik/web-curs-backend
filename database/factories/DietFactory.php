@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Row;
+use App\Models\Diet;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RowFactory extends Factory
+class DietFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Row::class;
+    protected $model = Diet::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,7 @@ class RowFactory extends Factory
     public function definition()
     {
         return [
-            'shop_id' => rand(1, 30)
+            'name' => $this->faker->title
         ];
     }
 }

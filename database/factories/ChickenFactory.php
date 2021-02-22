@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Row;
+use App\Models\Chicken;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RowFactory extends Factory
+class ChickenFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Row::class;
+    protected $model = Chicken::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,11 @@ class RowFactory extends Factory
     public function definition()
     {
         return [
-            'shop_id' => rand(1, 30)
+            'weight' => rand(1, 5),
+            'age' => rand(1, 5),
+            'number_of_eggs' => rand(10, 100),
+            'breed_id' => rand(1, 30),
+            'cell_id' =>rand(1, 30)
         ];
     }
 }

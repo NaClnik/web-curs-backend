@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use Faker\Generator;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -24,12 +25,16 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'email_verified_at' => now(),
-            'password' => Hash::make('snake'), // password
-            'api_token' => Str::random(10),
-            'role_id' => rand(1,2)
+            'password' => 'snake',
+            'api_token' => Str::random(80),
+            'role_id' => 2,
+            'surname' => $this->faker->lastName,
+            'name' => $this->faker->name,
+            'patronymic' => $this->faker->name,
+            'passport' => Str::random(6),
+            'salary' => rand(10000, 100000),
+            'photo_path' => $this->faker->imageUrl()
         ];
     }
 }

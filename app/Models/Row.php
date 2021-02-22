@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
+
 /**
  * App\Models\Row
  *
@@ -14,16 +15,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $shop_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Cell[] $cells
  * @property-read int|null $cells_count
  * @property-read \App\Models\Shop $shop
  * @method static \Illuminate\Database\Eloquent\Builder|Row newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Row newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Row onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Row query()
  * @method static \Illuminate\Database\Eloquent\Builder|Row whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Row whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Row whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Row whereShopId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Row whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|Row withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Row withoutTrashed()
  * @mixin \Eloquent
  */
 class Row extends Model

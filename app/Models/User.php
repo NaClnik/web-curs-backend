@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 /**
  * App\Models\User
  *
@@ -25,6 +26,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string $passport
  * @property float $salary
  * @property string $photo_path
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Cell[] $cells
  * @property-read int|null $cells_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
@@ -32,9 +34,11 @@ use Illuminate\Notifications\Notifiable;
  * @property-read \App\Models\Role $role
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Query\Builder|User onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereApiToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
@@ -47,6 +51,8 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSalary($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSurname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|User withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
  * @mixin \Eloquent
  */
 class User extends Authenticatable
@@ -59,7 +65,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
         'api_token',

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
+
 /**
  * App\Models\Breed
  *
@@ -17,19 +18,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $diet_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Chicken[] $chickens
  * @property-read int|null $chickens_count
  * @property-read \App\Models\Diet $diet
  * @method static \Illuminate\Database\Eloquent\Builder|Breed newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Breed newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Breed onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Breed query()
  * @method static \Illuminate\Database\Eloquent\Builder|Breed whereAvgWeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Breed whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Breed whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Breed whereDietId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Breed whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Breed whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Breed wherePerformance($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Breed whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|Breed withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Breed withoutTrashed()
  * @mixin \Eloquent
  */
 class Breed extends Model

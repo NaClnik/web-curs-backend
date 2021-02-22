@@ -21,6 +21,9 @@ class ShopFactory extends Factory
      */
     public function definition()
     {
-        return [];
+        return [
+            'description' => $this->faker->streetAddress
+        ];
     }
+
 }
