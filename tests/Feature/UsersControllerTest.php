@@ -7,16 +7,19 @@ use Faker\Provider\Address;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use PharIo\Manifest\Email;
 use Tests\TestCase;
 
 class UsersControllerTest extends TestCase
 {
+
     // TODO: Переместить в файл конфига.
     private $headers = [
-        'Authorization' => 'Bearer 6y2q8OZPXqSpFOjX5eP300BixTdLCsHo5j6IiDC20niuJt7kp3wnprpcTWp4D2DVpElKewXY6WBFCrtF',
+        'Authorization' => 'Bearer stub_admin_api_token',
     ];
+php
 
     /**
      * A basic feature test example.
@@ -45,7 +48,7 @@ class UsersControllerTest extends TestCase
             'photo_path' => $faker->imageUrl()
         ];
 
-        $response = $this->post(route('users.store'), $params, $this->headers);
+        $response = $this->postJson(route('users.store'), $params, $this->headers);
 
         $response->assertStatus(201);
     } // testStore.
@@ -69,14 +72,14 @@ class UsersControllerTest extends TestCase
             'photo_path' => $faker->imageUrl()
         ];
 
-        $response = $this->patch(route('users.update', ['user' => 1]), $params, $this->headers);
+        $response = $this->patchJson(route('users.update', ['user' => 1]), $params, $this->headers);
 
         $response->assertStatus(200);
     } // testUpdate.
 
     public function testDestroy()
     {
-        $response = $this->delete(route('users.destroy', ['user' => 7]), [], $this->headers);
+        $response = $this->deleteJson(route('users.destroy', ['user' => 7]), [], $this->headers);
 
         $response->assertStatus(204);
     } // testDestroy.

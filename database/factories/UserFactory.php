@@ -17,6 +17,8 @@ class UserFactory extends Factory
      */
     protected $model = User::class;
 
+    private $i = 0;
+
     /**
      * Define the model's default state.
      *
@@ -27,7 +29,7 @@ class UserFactory extends Factory
         return [
             'email' => $this->faker->unique()->safeEmail,
             'password' => 'snake',
-            'api_token' => Str::random(80),
+            'api_token' => 'stub_employee_api_token'.++$this->i,
             'role_id' => 2,
             'surname' => $this->faker->lastName,
             'name' => $this->faker->name,
