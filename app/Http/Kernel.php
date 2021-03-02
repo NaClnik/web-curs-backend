@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\AddAcceptJsonHeader;
 use App\Http\Middleware\RoleMiddleware;
+use Fruitcake\Cors\HandleCors;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -42,6 +43,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            HandleCors::class,
             AddAcceptJsonHeader::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class

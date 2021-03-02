@@ -8,8 +8,8 @@ class GetRedirectUrlByRoleHandler
 {
     // TODO: Написать маршруты для ролей.
     private array $rolesToUrl = [
-        'admin' => '',
-        'employee' => ''
+        'admin' => '/admin',
+        'employee' => '/employee'
     ]; // rolesToUrl.
 
     public function handle(string $role) : string

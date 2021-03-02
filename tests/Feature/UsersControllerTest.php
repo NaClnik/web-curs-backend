@@ -19,7 +19,6 @@ class UsersControllerTest extends TestCase
     private $headers = [
         'Authorization' => 'Bearer stub_admin_api_token',
     ];
-php
 
     /**
      * A basic feature test example.

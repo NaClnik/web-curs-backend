@@ -36,7 +36,7 @@ class LoginController extends Controller
             // TODO: Подумать над переводом на русский.
             $user = $this->usersService->getUserByEmailAndPassword($data['email'], $data['password']);
         } catch (ModelNotFoundException | AuthorizationException $modelNotFoundException){
-            return response()->json(['error' => 'invalid email or password'], 401);
+            return response()->json(['error' => 'Неверный email или пароль'], 401);
         } // catch.
 
         return response()->json([

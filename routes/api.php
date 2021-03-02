@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Cms\CellsController;
+use App\Http\Controllers\Cms\CurrentUserController;
 use App\Http\Controllers\Cms\ShopsController;
 use App\Http\Controllers\Cms\UsersController;
 use Illuminate\Http\Request;
@@ -37,16 +39,25 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('shops', ShopsController::class);
 
 // Общая маршрутизация.
-Route::post('auth/login', LoginController::class);
+Route::prefix('auth')->group(function (){
+   Route::post('login', LoginController::class);
+}); // auth.
 
 Route::middleware('auth:api')->group(function (){
     // Маршрутизация для админа.
-    Route::middleware('role:admin')->group(function (){
+    Route::middleware('role:admin')->prefix('admin')->group(function (){
         Route::apiResource('users', UsersController::class);
     }); // group.
 
     // Маршрутизация для работников.
-    Route::middleware('role:employee')->group(function (){
-
+    Route::middleware('role:employee')->prefix('employee')->group(function (){
+        Route::apiResource('cells', CellsController::class);
     }); // group
+
+    // Общая маршрутизация для авторизованых пользователей.
+    Route::prefix('currentUser')->group(function (){
+        Route::get('', [CurrentUserController::class, 'getUser']);
+        Route::get('/role', [CurrentUserController::class, 'getRole']);
+        Route::get('/cells', [CurrentUserController::class, 'getCells']);
+    });
 }); // group.

@@ -28,12 +28,12 @@ class UserFactory extends Factory
     {
         return [
             'email' => $this->faker->unique()->safeEmail,
-            'password' => 'snake',
+            'password' => Hash::make('snake'),
             'api_token' => 'stub_employee_api_token'.++$this->i,
             'role_id' => 2,
             'surname' => $this->faker->lastName,
-            'name' => $this->faker->name,
-            'patronymic' => $this->faker->name,
+            'name' => $this->faker->firstName,
+            'patronymic' => $this->faker->firstName,
             'passport' => Str::random(6),
             'salary' => rand(10000, 100000),
             'photo_path' => $this->faker->imageUrl()

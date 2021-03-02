@@ -14,7 +14,7 @@ class UsersRepository
     } // createFromArray.
 
     public function getAll(){
-        return User::all();
+        return User::query()->where('role_id', 2)->get();
     } // getAll.
 
     public function getById(int $id){
