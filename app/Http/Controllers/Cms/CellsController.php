@@ -26,9 +26,8 @@ class CellsController extends Controller
      */
     public function index()
     {
-        $ok = request()->user()->cannot('viewAny');
-        if ($ok) {
-            return response()->json([$ok], 403);
+        if (request()->user()->cannot('viewAny')) {
+            return response()->json([], 403);
         } // if.
 
         return response()->json($this->cellsService->getAllCells());
@@ -42,8 +41,6 @@ class CellsController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $this->cellsService->createCellFromArray($request->all());
 
         return response()->json([], 201);
@@ -57,9 +54,8 @@ class CellsController extends Controller
      */
     public function show(Cell $cell)
     {
-        $ok = request()->user()->cannot('view', $cell);
-        if($ok){
-            return response()->json([$ok], 403);
+        if(request()->user()->cannot('view', $cell)){
+            return response()->json([], 403);
         } // if.
 
         return response()->json($cell);
