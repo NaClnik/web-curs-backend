@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BreedSeeder::class);
         $this->call(CellSeeder::class);
         $this->call(ChickenSeeder::class);
+        $this->call(ReportSeeder::class);
     } // run.
 }

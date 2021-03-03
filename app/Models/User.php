@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 
+
+
 /**
  * App\Models\User
  *
@@ -31,6 +33,8 @@ use Illuminate\Notifications\Notifiable;
  * @property-read int|null $cells_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Report[] $reports
+ * @property-read int|null $reports_count
  * @property-read \App\Models\Role $role
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
@@ -103,4 +107,8 @@ class User extends Authenticatable
     public function cells(){
         return $this->hasMany(Cell::class);
     } // cells.
+
+    public function reports(){
+        return $this->hasMany(Report::class);
+    } // reports.
 } // User.

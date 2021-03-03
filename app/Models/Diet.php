@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 
+
 /**
  * App\Models\Diet
  *

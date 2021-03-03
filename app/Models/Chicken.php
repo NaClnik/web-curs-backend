@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 
+
+
 /**
  * App\Models\Chicken
  *
@@ -22,6 +24,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Models\Breed $breed
  * @property-read \App\Models\Cell $cell
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Report[] $reports
+ * @property-read int|null $reports_count
  * @method static \Illuminate\Database\Eloquent\Builder|Chicken newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Chicken newQuery()
  * @method static \Illuminate\Database\Query\Builder|Chicken onlyTrashed()
@@ -58,4 +62,8 @@ class Chicken extends Model
     public function cell(){
         return $this->belongsTo(Cell::class);
     } // cell.
+
+    public function reports(){
+        return $this->hasMany(Report::class);
+    } // reports.
 }
