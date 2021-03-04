@@ -24,7 +24,7 @@ class HireUserAndSendMailHandler
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'api_token' => Str::random(80),
-            'role_id' => 1,
+            'role_id' => 2,
             'surname' => $data['surname'],
             'name' => $data['name'],
             'patronymic' => $data['patronymic'],
